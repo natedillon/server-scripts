@@ -88,13 +88,8 @@ combined_backup () {
   check_directory $directory
 
   # Create backup
-  mysqldump -u $mysql_user -p$mysql_password --all-databases > $directory/$filename.sql
+  mysqldump -u $mysql_user -p$mysql_password --all-databases | gzip > $directory/$filename.sql.gz
   check_backup
-
-  # Compress backup
-  zip -j $directory/$filename.zip $directory/$filename.sql
-  check_compression
-  rm $directory/$filename.sql
   
   #echo $filename.zip | mailx -s 'Backup was successfully created' $email
 }
@@ -110,13 +105,8 @@ separated_backup () {
       check_directory $directory
 
       # Create backup
-      mysqldump -u $mysql_user -p$mysql_password $db > $directory/$filename.sql
+      mysqldump -u $mysql_user -p$mysql_password $db | gzip > $directory/$filename.sql.gz
       check_backup
-
-      # Compress backup
-      zip -j $directory/$filename.zip $directory/$filename.sql
-      check_compression
-      rm $directory/$filename.sql
     fi
   done
 }
@@ -129,22 +119,6 @@ check_backup () {
     echo 'mysqldump return non-zero code'
     if [ $email_notifications = true ]; then
       mailx -s 'No backup was created!' $email
-    fi
-    exit
-  fi
-}
-
-# Checks for successful compression
-check_compression () {
-  if [ $? == 0 ]; then
-    echo 'The backup was successfully compressed'
-    if [ $email_notifications = true ]; then
-      mailx -s 'Backup was created!' $email
-    fi
-  else
-    echo 'Error compressing backup'
-    if [ $email_notifications = true ]; then
-      mailx -s 'Backup was not created!' $email
     fi
     exit
   fi
