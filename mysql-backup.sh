@@ -7,7 +7,6 @@
 #   https://natedillon.com
 #
 # Requires:
-# - zip
 # - postfix (for e-mail notifications)
 # - mailutils (for e-mail notifications)
 # ========================================
@@ -96,7 +95,7 @@ combined_backup () {
 
 # Runs the separated backup style
 separated_backup () {
-  for db in $(mysql -e 'show databases' -s --skip-column-names); do
+  for db in $(mysql -u $mysql_user -p$mysql_password -e 'show databases' -s --skip-column-names); do
     
     if [ $db != information_schema ] && [ $db != mysql ] && [ $db != performance_schema ] && [ $db != sys ]; then
     
