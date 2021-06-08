@@ -48,7 +48,7 @@ weekly_backup_day=1
 
 # Day of the month to run monthly backup
 # Single digit days require a leading zero (e.g. 01)
-monthly_backup_day=07
+monthly_backup_day=01
 
 # Backup filenames:
 # - datetime is the time stamp added to the files
