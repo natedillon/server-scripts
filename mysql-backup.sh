@@ -2,13 +2,10 @@
 
 # ========================================
 # MySQL database backup
+# https://github.com/natedillon/server-scripts
 #
 # Nate Dillon
-#   https://natedillon.com
-#
-# Requires:
-# - postfix (for e-mail notifications)
-# - mailutils (for e-mail notifications)
+# https://natedillon.com
 # ========================================
 
 
@@ -81,8 +78,6 @@ combined_backup () {
   local directory=$1/$combined_filename
   local filename=$combined_filename-$datetime
   check_directory $directory
-
-  # Create backup
   mysqldump -u $mysql_user -p$mysql_password --all-databases | gzip > $directory/$filename.sql.gz
   check_backup
 }
@@ -90,14 +85,10 @@ combined_backup () {
 # Runs the separated backup style
 separated_backup () {
   for db in $(mysql -u $mysql_user -p$mysql_password -e 'show databases' -s --skip-column-names); do
-    
     if [ $db != information_schema ] && [ $db != mysql ] && [ $db != performance_schema ] && [ $db != sys ]; then
-    
       local directory=$1/$db
       local filename=$db-$datetime
       check_directory $directory
-
-      # Create backup
       mysqldump -u $mysql_user -p$mysql_password $db | gzip > $directory/$filename.sql.gz
       check_backup
     fi
