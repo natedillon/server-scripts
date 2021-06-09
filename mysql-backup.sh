@@ -27,10 +27,6 @@ monthly_directory=$backup_directory/monthly
 # - both
 backup_style=both
 
-# E-mail notifications
-email_notifications=false
-email=<username@mail.com>
-
 # MySQL credentials
 mysql_user=<user_name>
 mysql_password=<password>
@@ -89,8 +85,6 @@ combined_backup () {
   # Create backup
   mysqldump -u $mysql_user -p$mysql_password --all-databases | gzip > $directory/$filename.sql.gz
   check_backup
-  
-  #echo $filename.zip | mailx -s 'Backup was successfully created' $email
 }
 
 # Runs the separated backup style
@@ -116,9 +110,6 @@ check_backup () {
     echo 'Sql dump created'
   else
     echo 'mysqldump return non-zero code'
-    if [ $email_notifications = true ]; then
-      mailx -s 'No backup was created!' $email
-    fi
     exit
   fi
 }
