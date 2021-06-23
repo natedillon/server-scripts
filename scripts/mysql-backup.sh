@@ -98,15 +98,15 @@ separated_backup () {
 # Checks for successful backup
 check_backup () {
   if [ $? == 0 ]; then
-    echo 'Sql dump created'
+    echo 'Database backup created'
   else
-    echo 'mysqldump return non-zero code'
+    echo 'Database backup failed'
     exit
   fi
 }
 
 
-# Setup directories
+# Directories setup
 # --------------------
 
 check_directory $backup_directory
