@@ -6,15 +6,18 @@ Shell scripts used for tasks on my web server. The scripts were written and test
 
 ### Backup MySQL
 
-1. Put the `mysql-backup.sh` file somewhere on the web server (e.g. `/home/user/scripts/`).
-2. Modify the settings near the top of the file. Specifically, it requires adding your MySQL username and password.
-3. Make sure the file is executable, running `chmod +x` on the file if needed (e.g. `chmod +x /home/user/scripts/mysql-backup.sh`).
+1. Put the `backup-mysql` directory somewhere on the web server (e.g. `/home/user/scripts/`).
+2. Modify the settings near the top of the `backup-mysql.sh` file. Specifically, it requires adding your MySQL username and password.
 
 ### Backup files
 
 1. Put the `backup-files` directory somewhere on the web server (e.g. `/home/user/scripts/`).
 2. Make a duplicate of the `config.sh.example` file, naming it `config.sh`.
 3. Modify the settings in the `config.sh` file. Specifically, it will require setting up the name and path for the desired files to backup.
+
+### Make executable
+
+If needed, make the scripts executable by running `chmod +x` on the main files (e.g. `chmod +x /home/user/scripts/backup-mysql.sh`).
 
 ### Cron jobs
 
