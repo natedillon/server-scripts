@@ -1,5 +1,6 @@
 #!/bin/bash
 
+
 # ========================================
 # MySQL database backup
 # https://github.com/natedillon/server-scripts
