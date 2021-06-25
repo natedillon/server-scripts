@@ -1,0 +1,25 @@
+# Backup storage directories
+backup_directory=$HOME/backups/files
+daily_directory=$backup_directory/daily
+weekly_directory=$backup_directory/weekly
+monthly_directory=$backup_directory/monthly
+
+# Number of backups to keep for daily/weekly/monthly backups
+# Set to 0 to disable
+keep_days=30
+keep_weeks=4
+keep_months=12
+
+# Day to run weekly backup
+# An integer, 1 (Monday) through 7 (Sunday)
+weekly_backup_day=1
+
+# Day of the month to run monthly backup
+# Single digit days require a leading zero (e.g. 01)
+monthly_backup_day=01
+
+# Backup names and paths
+name[0]=backup-name
+path[0]=/path/to/backup/files
+name[1]=backup-name
+path[1]=/path/to/backup/files
